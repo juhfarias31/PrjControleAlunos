@@ -1,0 +1,49 @@
+*{
+    text-align: center;
+    background-color: rgba(156, 223, 156, 0.729);
+    margin: 10px;
+    padding:0;
+    box-sizing:border-box;
+    list-style:none;
+    text-decoration:none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:x-large;
+    color: rgb(0, 0, 0);
+}
+
+
+#principal{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    border: 5px solid black;
+}
+
+#cadastro{
+    font-family:'Times New Roman', Times, serif;
+    font-size:larger;
+    
+}
+
+#pesquisa{
+    font-family:'Times New Roman', Times, serif;
+    font-size:larger;
+}
+
+button {
+    position: relative;
+    background-color: #4CAF50;
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    padding: 2px;
+    width: 170px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
