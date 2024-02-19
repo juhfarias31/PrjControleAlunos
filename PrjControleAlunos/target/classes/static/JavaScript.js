@@ -4,32 +4,34 @@ function cadastrarJogo(event) {
     event.preventDefault();
 
     const name = document.getElementById('name').value;
-    const plataform = document.getElementById('plataform').value;
+    const cpf = document.getElementById('cpf').value;
+    const rg = document.getElementById('rg').value;
+    const endereco = document.getElementById('endereco').value;
 
-    fetch('http://localhost:8080/jogos', {
+    fetch('http://localhost:8080/alunos', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, plataform }),
+        body: JSON.stringify({ name, cpf, rg, endereco }),
     })
         .then(response => response.json())
         .then(data => {
-            alert('Jogo cadastrado com sucesso!');
+            alert('Aluno cadastrado com sucesso!');
             document.getElementById('cadastroForm').reset();            
         })
         .catch(error => {
-            console.error('Erro ao cadastrar jogo:', error);
+            console.error('Erro ao cadastrar aluno:', error);
         });
 }
 
 function pesquisarJogo() {
     const searchId = document.getElementById('searchId').value;
 
-    fetch(`http://localhost:8080/jogos/${searchId}`)
+    fetch(`http://localhost:8080/alunos/${searchId}`)
         .then(response => {
             if (response.status === 404) {
-                return Promise.reject('Jogo não encontrado');
+                return Promise.reject('Aluno não encontrado');
                 result = 0;
             }
             return response.json();
@@ -37,12 +39,14 @@ function pesquisarJogo() {
         .then(data => {
             result = 1;
             document.getElementById('name').value = `${data.name}`;
-            document.getElementById('plataform').value = `${data.plataform}`;
+            document.getElementById('cpf').value = `${data.cpf}`;
+            document.getElementById('rg').value = `${data.rg}`;
+            document.getElementById('endereco').value = `${data.endereco}`;
         })
         .catch(error => {
-            console.error('Erro ao pesquisar jogo:', error);
+            console.error('Erro ao pesquisar aluno:', error);
             const resultadoPesquisa = document.getElementById('resultadoPesquisa');
-            resultadoPesquisa.innerHTML = 'Jogo não encontrado.';
+            resultadoPesquisa.innerHTML = 'Aluno não encontrado.';
         });
 }
 
@@ -50,26 +54,28 @@ function atualizarJogo() {
     pesquisarJogo();
     if (result == 1) {
         const name = document.getElementById('name').value;
-        const plataform = document.getElementById('plataform').value;
+        const cpf = document.getElementById('cpf').value;
+        const rg = document.getElementById('rg').value;
+        const endereco = document.getElementById('endereco').value;
         const searchId = document.getElementById('searchId').value;
 
-        fetch(`http://localhost:8080/jogos/${searchId}`, {
+        fetch(`http://localhost:8080/alunos/${searchId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, plataform }),
+            body: JSON.stringify({ name, cpf, rg, endereco }),
         })
             .then(response => response.json())
             .then(data => {
-                alert('Jogo atualizado com sucesso!');
+                alert('Aluno atualizado com sucesso!');
                 document.getElementById('cadastroForm').reset();                
             })
             .catch(error => {
-                console.error('Erro ao atualizar jogo:', error);
+                console.error('Erro ao atualizar aluno:', error);
             });
     } else {
-        alert('ID não encontrado na base de dados. Nenhum jogo foi alterado. Favor pesquisar jogo a ser alterado !!!');
+        alert('ID não encontrado na base de dados. Nenhum aluno foi alterado. Favor pesquisar aluno a ser alterado !!!');
     }
 }
 
@@ -81,22 +87,22 @@ function excluirJogo(){
 
         const searchId = document.getElementById('searchId').value;
 
-        fetch(`http://localhost:8080/jogos/${searchId}`, {
+        fetch(`http://localhost:8080/alunos/${searchId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, plataform }),
+            body: JSON.stringify({ name, cpf, rg, endereco }),
         })
             .then(response => response.json())
             .then(data => {
-                alert('Jogo excluido com sucesso!');
+                alert('Aluno excluido com sucesso!');
                 document.getElementById('cadastroForm').reset();                
             })
             .catch(error => {
-                console.error('Erro ao excluido jogo:', error);
+                console.error('Erro ao excluido aluno:', error);
             });
     } else {
-        alert('ID não encontrado na base de dados. Nenhum jogo foi excluido. Favor pesquisar jogo a ser excluido !!!');
+        alert('ID não encontrado na base de dados. Nenhum aluno foi excluido. Favor pesquisar aluno a ser excluido !!!');
     }
 }
